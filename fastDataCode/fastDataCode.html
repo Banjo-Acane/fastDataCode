@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动生成数据代码</title>
+    <script>
+        function makeCode() {
+            let input = document.getElementById('input');
+            let titleList = input.value.split('\n');
+            let str = 'list: [';
+            for (let title of titleList){
+                str += '\'' + title + '\', ';
+            }
+            str = str.slice(0,str.length-2);
+a
+            let needQuo = document.getElementById('needQuo').checked;
+            let inden = '    ';
+            str += '],\n';
+            str += 'item: [\n' + inden + '{\n';
+            if (needQuo){
+                for (let title of titleList){
+                    str += inden + '\'' + title + '\': \'\',\n'
+                }
+            }else {
+                for (let title of titleList){
+                    str += inden + title + ': \'\',\n'
+                }
+            }
+
+            str += inden + '}\n';
+            str += '],';
+            let output = document.getElementById('output');
+            output.value = str;
+        }
+    </script>
+</head>
+<body>
+    <textarea id="input" placeholder="请填入数据属性名"></textarea>
+    <button onclick="makeCode()">生成代码</button>
+    <input id="needQuo" type="checkbox"><label for="needQuo"></label>
+    <textarea id="output"></textarea>
+</body>
+</html>
+<style>
+    #input{
+        width: 200px;
+        height: 400px;
+    }
+    #output{
+        height: 400px;
+        width: 400px;
+    }
+</style>
